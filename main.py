@@ -36,7 +36,7 @@ parser.add_argument('--test', dest='test', action='store_true',
                     help='test model on test set')
 args = parser.parse_args()
 
-use_gpu = args.use_gpu
+phases = ['train', 'test', 'validation']
 
 # Data augmentation and normalization for training
 # Just normalization for validation
@@ -60,15 +60,6 @@ data_transforms = {
         transforms.Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225])
     ]),
 }
-root = args.data_root
-phases = ['train', 'test', 'validation']
-image_datasets = {x: AlexnetDataset(root, x, data_transforms[x]) for x in phases}
-dataloaders = {x: DataLoader(image_datasets[x], batch_size=128, shuffle=True, num_workers=4) for x in phases}
-dataset_sizes = {x: len(image_datasets[x]) for x in phases}
-class_names = image_datasets['train'].classes
-
-print(class_names)
-print(dataset_sizes)
 
 
 def save_params():
@@ -77,32 +68,41 @@ def save_params():
     torch.save(args, param_file)
 
 
+def load_datasets(phases):
+    root = args.data_root
+    image_datasets = {x: AlexnetDataset(root, x, data_transforms[x]) for x in phases}
+    dataloaders = {x: DataLoader(image_datasets[x], batch_size=128, shuffle=True, num_workers=4) for x in phases}
+    dataset_sizes = {x: len(image_datasets[x]) for x in phases}
+    class_names = image_datasets['train'].classes
+    print(class_names)
+    print(dataset_sizes)
+    return dataloaders, class_names
+
+
 if __name__ == '__main__':
     pp.pprint(args)
     save_params()
-
     if args.remove_exif:
         for phase in phases:
             remove_exif(root, phase)
-    if use_gpu:
-        model = model.cuda()
-
-    criterion = nn.CrossEntropyLoss()
+    dataloaders, class_names = load_datasets(phases)
+    model = alexnet(pretrained=False, num_classes=len(class_names))
 
     if args.reload:
         if os.path.isfile(args.reload):
             print("=> loading checkpoint '{}'".format(args.reload))
             checkpoint = torch.load(args.reload)
-            args.start_epoch = checkpoint['epoch']
-            best_acc = checkpoint['best_acc']
-            model.reload_state_dict(checkpoint['state_dict'])
+            model.load_state_dict(checkpoint['state_dict'])
             # optimizer.reload_state_dict(checkpoint['optimizer'])
-            print("=> loaded checkpoint '{}' (epoch {})"
-                  .format(args.reload, checkpoint['epoch']))
+            print("=> loaded checkpoint '{}' (epoch {}, accuracy {})"
+                  .format(args.reload, checkpoint['epoch'], checkpoint['best_acc']))
         else:
             print("=> no checkpoint found at '{}'".format(args.reload))
-    else:
-        model = alexnet(pretrained=False, num_classes=len(class_names))
+    
+    if args.use_gpu:
+        model = model.cuda()
+
+    criterion = nn.CrossEntropyLoss()
 
     # Observe that all parameters are being optimized
     optimizer = optim.SGD(model.parameters(), lr=args.lr, momentum=args.momentum)
@@ -112,4 +112,4 @@ if __name__ == '__main__':
 
     # TODO: Store the parameters and use them to initialise next time.
     model = train_model(model, dataloaders, criterion, optimizer, exp_lr_scheduler, args.save_dir,
-        num_epochs=args.epochs, use_gpu=use_gpu)
+        num_epochs=args.epochs, use_gpu=args.use_gpu)
