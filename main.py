@@ -17,11 +17,15 @@ from train import train_model
 plt.ion()
 
 parser = argparse.ArgumentParser(description='Alexnet Experiment')
-parser.add_argument('--usegpu', dest='use_gpu', action='store_true', default=False)
+parser.add_argument('--data_root', dest='data_root', default='/home/cse/dual/cs5130298/scratch/ImageNet_Subset/')
 parser.add_argument('--remove_exif', dest='remove_exif', action='store_true', default=False)
+parser.add_argument('--usegpu', dest='use_gpu', action='store_true', default=False)
 parser.add_argument('--epochs', dest='num_epochs', type=int, default=20)
 parser.add_argument('--lr', dest='lr', type=float, default=0.01)
 parser.add_argument('--step', dest='step_size', type=int, default=10)
+args = parser.parse_args()
+
+use_gpu = args.use_gpu
 
 # Data augmentation and normalization for training
 # Just normalization for validation
@@ -45,7 +49,7 @@ data_transforms = {
         transforms.Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225])
     ]),
 }
-root = '/home/cse/dual/cs5130298/scratch/ImageNet_Subset/'
+root = args.data_root
 phases = ['train', 'test', 'validation']
 image_datasets = {x: AlexnetDataset(root, x, data_transforms[x]) for x in phases}
 dataloaders = {x: DataLoader(image_datasets[x], batch_size=128, shuffle=True, num_workers=4) for x in phases}
@@ -56,19 +60,21 @@ print(class_names)
 print(dataset_sizes)
 
 if __name__=='__main__':
-    if remove_exif:
+    if args.remove_exif:
         for phase in phases:
             remove_exif(root, phase)
     model = alexnet(pretrained=False, num_classes=len(class_names))
+
     if use_gpu:
         model = model.cuda()
+
     criterion = nn.CrossEntropyLoss()
 
     # Observe that all parameters are being optimized
-    optimizer = optim.SGD(model.parameters(), lr=0.01, momentum=0.9)
+    optimizer = optim.SGD(model.parameters(), lr=args.lr, momentum=0.9)
 
     # Decay LR by a factor of gamma every step_size epochs
-    exp_lr_scheduler = lr_scheduler.StepLR(optimizer, step_size=7, gamma=1)
+    exp_lr_scheduler = lr_scheduler.StepLR(optimizer, step_size=args.step_size, gamma=1)
     # TODO: Store the parameters and use them to initialise next time.
     model = train_model(model, dataloaders, dataset_sizes, criterion, optimizer, exp_lr_scheduler,
-                           num_epochs=40, use_gpu=use_gpu)
+                           num_epochs=args.num_epochs, use_gpu=use_gpu)
