@@ -1,15 +1,6 @@
 # ref: https://www.analyticsvidhya.com/blog/2016/04/deep-learning-computer-vision-introduction-convolution-neural-networks/
 
-import os
-import time
-import torch
 import torch.nn as nn
-import torch.optim as optim
-from torch.optim import lr_scheduler
-from torch.autograd import Variable
-import torchvision
-from torchvision import datasets, models, transforms
-import numpy as np
 import torch.utils.model_zoo as model_zoo
 
 __all__ = ['AlexNet', 'alexnet']
