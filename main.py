@@ -5,13 +5,10 @@ import torch
 import torch.nn as nn
 import torch.optim as optim
 from torch.optim import lr_scheduler
-import torchvision
-from torchvision import datasets, models, transforms
-import numpy as np
+from torchvision import transforms
 import matplotlib.pyplot as plt
-import torch.utils.model_zoo as model_zoo
 from torch.utils.data import DataLoader
-from dataset import AlexnetDataset, imshow, remove_exif
+from dataset import AlexnetDataset, remove_exif
 from network import alexnet
 from train import train_model, test_model
 
@@ -23,17 +20,30 @@ parser = argparse.ArgumentParser(description='Alexnet Experiment')
 parser.add_argument('--data_root', default='/home/cse/dual/cs5130298/scratch/ImageNet_Subset/')
 parser.add_argument('--remove_exif', action='store_true', default=False)
 parser.add_argument('--use_gpu', action='store_true', default=False)
-parser.add_argument('--epochs', default=40, type=int, metavar='N')
-parser.add_argument('--lr', default=0.01, type=float, metavar='LR')
-parser.add_argument('--momentum', default=0.9, type=float, metavar='M')
-parser.add_argument('--step_size', default=10, type=int, metavar='N')
-parser.add_argument('--save_dir', default='checkpoints/', type=str, metavar='PATH')
-parser.add_argument('--reload', default='', type=str, metavar='PATH',
-                    help='path to checkpoint to load (default: none)')
+
+# experiment options
+parser.add_argument('--activation', type=str, choices=['relu', 'tanh'], default='relu',
+                    help='Activation function to use. (default: relu)')
+parser.add_argument('--use_dropout', action='store_true', default=True)
+parser.add_argument('--overlap_pooling', action='store_true', default=True)
+parser.add_argument('--optimizer', type=str, choices=['sgd', 'sgdmom', 'adam'], default='sgdmom',
+                    help='Optimizer to use. (default: sgdmom)')
+
+parser.add_argument('--epochs', type=int, default=40, metavar='N')
+parser.add_argument('--lr', type=float, default=0.01, metavar='LR')
+parser.add_argument('--momentum', type=float, default=0.9, metavar='M')
+parser.add_argument('--step_size', type=int, default=10, metavar='N')
+
+# saving and reloading
+parser.add_argument('--save_dir', type=str, default='checkpoints/', metavar='PATH')
+parser.add_argument('--reload', type=str, default='', metavar='PATH',
+                    help='Path to checkpoint to load (default: none)')
 # parser.add_argument('--start-epoch', default=0, type=int, metavar='N',
-#                     help='manual epoch number (useful on restarts)')
+#                     help='Manual epoch number (useful on restarts)')
+
+# to run in test mode
 parser.add_argument('--test', default=False, action='store_true',
-                    help='test model on test set')
+                    help='Test model on test set (use with --reload)')
 args = parser.parse_args()
 
 # Data augmentation and normalization for training
@@ -90,8 +100,8 @@ if __name__ == '__main__':
             remove_exif(args.data_root, phase)
 
     dataloaders, class_names = load_datasets(phases)
-    model = alexnet(pretrained=False, num_classes=len(class_names))
-
+    model = alexnet(pretrained=False, num_classes=len(class_names),
+                    relu=(args.activation == 'relu'), dropout=args.use_dropout, overlap=args.overlap_pooling)
     if args.reload:
         if os.path.isfile(args.reload):
             print("=> loading checkpoint '{}'".format(args.reload))
@@ -112,11 +122,16 @@ if __name__ == '__main__':
         criterion = nn.CrossEntropyLoss()
 
         # Observe that all parameters are being optimized
-        optimizer = optim.SGD(model.parameters(), lr=args.lr, momentum=args.momentum)
+        if args.optimizer == 'adam':
+            optimizer = optim.Adam(model.parameters(), lr=args.lr)
+        elif args.optimizer == 'sgd':
+            optimizer = optim.SGD(model.parameters(), lr=args.lr)
+        else:
+            optimizer = optim.SGD(model.parameters(), lr=args.lr, momentum=args.momentum)
 
         # Decay LR by a factor of gamma every step_size epochs
         exp_lr_scheduler = lr_scheduler.StepLR(optimizer, step_size=args.step_size, gamma=1)
 
         # TODO: Store the parameters and use them to initialise next time.
         model = train_model(model, dataloaders, criterion, optimizer, exp_lr_scheduler, args.save_dir,
-            num_epochs=args.epochs, use_gpu=args.use_gpu)
+                            num_epochs=args.epochs, use_gpu=args.use_gpu)
