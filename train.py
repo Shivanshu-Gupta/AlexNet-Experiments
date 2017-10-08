@@ -128,5 +128,5 @@ def test_model(model, test_loader, use_gpu=False):
         # statistics
         running_corrects += torch.sum(preds == labels.data)
     acc = running_corrects / len(test_loader)
-    print('Test Acc: {:.4f}'.format(acc))
+    print('Test Acc: {:.4f} ({}/{})'.format(acc, running_corrects, len(test_loader)))
     return acc

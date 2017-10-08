@@ -70,7 +70,7 @@ def load_datasets(phases):
     image_datasets = {x: AlexnetDataset(args.data_root, x, data_transforms[x]) for x in phases}
     dataloaders = {x: DataLoader(image_datasets[x], batch_size=128, shuffle=True, num_workers=4) for x in phases}
     dataset_sizes = {x: len(image_datasets[x]) for x in phases}
-    class_names = image_datasets['train'].classes
+    class_names = image_datasets[phases[0]].classes
     print(class_names)
     print(dataset_sizes)
     return dataloaders, class_names
