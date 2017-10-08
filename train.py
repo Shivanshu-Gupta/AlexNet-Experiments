@@ -34,17 +34,17 @@ def train(model, train_loader, criterion, optimizer, use_gpu=False):
         running_loss += loss.data[0]
         running_corrects += torch.sum(preds == labels.data)
 
-    epoch_loss = running_loss / len(train_loader)
-    epoch_acc = running_corrects / len(train_loader)
+    loss = running_loss / len(train_loader)
+    acc = running_corrects / len(train_loader)
 
-    print('Train Loss: {:.4f} Acc: {:.4f}'.format(epoch_loss, epoch_acc))
-    return epoch_loss, epoch_acc
+    print('Train Loss: {:.4f} Acc: {:.4f} ({}/{})'.format(loss, acc, running_corrects, len(train_loader)))
+    return loss, acc
+
 
 def validate(model, val_loader, criterion, use_gpu=False):
     model.eval()  # Set model to evaluate mode
     running_loss = 0.0
     running_corrects = 0
-
     # Iterate over data.
     for (inputs, labels) in val_loader:
         # wrap input, labels in Variable
@@ -53,22 +53,17 @@ def validate(model, val_loader, criterion, use_gpu=False):
             labels = Variable(labels.cuda())
         else:
             inputs, labels = Variable(inputs), Variable(labels)
-
         # forward
         outputs = model(inputs)
         _, preds = torch.max(outputs.data, 1)
         loss = criterion(outputs, labels)
-
         # statistics
         running_loss += loss.data[0]
         running_corrects += torch.sum(preds == labels.data)
-
-    epoch_loss = running_loss / len(val_loader)
-    epoch_acc = running_corrects / len(val_loader)
-
-    print('Validation Loss: {:.4f} Acc: {:.4f}'.format(epoch_loss, epoch_acc))
-
-    return epoch_loss, epoch_acc
+    loss = running_loss / len(val_loader)
+    acc = running_corrects / len(val_loader)
+    print('Validation Loss: {:.4f} Acc: {:.4f} ({}/{})'.format(loss, acc, running_corrects, len(val_loader)))
+    return loss, acc
 
 
 def train_model(model, data_loaders, criterion, optimizer, scheduler, save_dir, num_epochs=25, use_gpu=False):
@@ -114,3 +109,24 @@ def save_checkpoint(save_dir, state, is_best):
     torch.save(state, savepath)
     if is_best:
         shutil.copyfile(savepath, save_dir + '/' + 'model_best.pth.tar')
+
+
+def test_model(model, test_loader, use_gpu=False):
+    model.eval()  # Set model to evaluate mode
+    running_corrects = 0
+    # Iterate over data.
+    for (inputs, labels) in test_loader:
+        # wrap input, labels in Variable
+        if use_gpu:
+            inputs = Variable(inputs.cuda())
+            labels = Variable(labels.cuda())
+        else:
+            inputs, labels = Variable(inputs), Variable(labels)
+        # forward
+        outputs = model(inputs)
+        _, preds = torch.max(outputs.data, 1)
+        # statistics
+        running_corrects += torch.sum(preds == labels.data)
+    acc = running_corrects / len(test_loader)
+    print('Test Acc: {:.4f}'.format(acc))
+    return acc
