@@ -23,7 +23,7 @@ def find_classes(dir):
     return classes, class_to_idx
 
 
-def make_dataset(dir, phase, class_to_idx, remove_exif):
+def make_dataset(dir, phase, class_to_idx):
     images = []
     dir = os.path.expanduser(dir)
     for target in sorted(os.listdir(dir)):
@@ -38,11 +38,6 @@ def make_dataset(dir, phase, class_to_idx, remove_exif):
                 if not is_image_file(fname):
                     continue
                 path = os.path.join(root, fname)
-                if remove_exif:
-                    try:
-                        piexif.remove(path)
-                    except:
-                        print("Failed to remove exif for: " + path)
                 item = (path, class_to_idx[target])
                 images.append(item)
 
@@ -75,9 +70,9 @@ def default_loader(path):
 
 class AlexnetDataset(Dataset):
 
-    def __init__(self, root, phase, transform=None, loader=default_loader, remove_exif=False):
+    def __init__(self, root, phase, transform=None, loader=default_loader):
         classes, class_to_idx = find_classes(root)
-        imgs = make_dataset(root, phase, class_to_idx, remove_exif)
+        imgs = make_dataset(root, phase, class_to_idx)
         if len(imgs) == 0:
             raise(RuntimeError("Found 0 images in subfolders of: " + root + "\n"
                                "Supported image extensions are: " + ",".join(IMG_EXTENSIONS)))
@@ -98,7 +93,8 @@ class AlexnetDataset(Dataset):
 
     def __len__(self):
         return len(self.imgs)
-    
+
+
 def imshow(inp, title=None):
     """Imshow for Tensor."""
     inp = inp.numpy().transpose((1, 2, 0))
@@ -109,7 +105,7 @@ def imshow(inp, title=None):
     if title is not None:
         plt.title(title)
     plt.pause(0.001)  # pause a bit so that plots are updated
-    
+
 
 def remove_exif(dir, phase):
     dir = os.path.expanduser(dir)
