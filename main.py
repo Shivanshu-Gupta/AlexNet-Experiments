@@ -25,7 +25,7 @@ parser.add_argument('--use_gpu', action='store_true', default=False)
 parser.add_argument('--activation', type=str, choices=['relu', 'tanh'], default='relu',
                     help='activation function to use. (default: relu)')
 parser.add_argument('--no_dropout', action='store_false', default=True)
-parser.add_argument('--no_overlap_pooling', action='store_false', default=True)
+parser.add_argument('--no_overlap', action='store_false', default=True)
 parser.add_argument('--optimizer', type=str, choices=['sgdmomwd', 'sgd', 'sgdmom', 'adam'], default='sgdmomwd',
                     help='optimizer to use. (default: sgdmomwd)')
 
@@ -101,8 +101,8 @@ if __name__ == '__main__':
 
     dataloaders, class_names = load_datasets(phases)
     model = alexnet(pretrained=False, num_classes=len(class_names),
-                    relu=(args.activation == 'relu'), dropout=args.use_dropout, 
-                    overlap=args.overlap_pooling, init_wts=args.init_wts)
+                    relu=(args.activation == 'relu'), dropout=args.no_dropout, 
+                    overlap=args.no_overlap, init_wts=args.init_wts)
     if args.reload:
         if os.path.isfile(args.reload):
             print("=> loading checkpoint '{}'".format(args.reload))
