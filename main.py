@@ -24,16 +24,16 @@ parser.add_argument('--use_gpu', action='store_true', default=False)
 # experiment options
 parser.add_argument('--activation', type=str, choices=['relu', 'tanh'], default='relu',
                     help='activation function to use. (default: relu)')
-parser.add_argument('--use_dropout', action='store_true', default=True)
-parser.add_argument('--overlap_pooling', action='store_true', default=True)
-parser.add_argument('--optimizer', type=str, choices=['sgd', 'sgdmom', 'adam'], default='sgdmom',
-                    help='optimizer to use. (default: sgdmom)')
+parser.add_argument('--no_dropout', action='store_false', default=True)
+parser.add_argument('--no_overlap_pooling', action='store_false', default=True)
+parser.add_argument('--optimizer', type=str, choices=['sgdmomwd', 'sgd', 'sgdmom', 'adam'], default='sgdmomwd',
+                    help='optimizer to use. (default: sgdmomwd)')
 
 parser.add_argument('--epochs', type=int, default=40, metavar='N')
 parser.add_argument('--lr', type=float, default=0.01, metavar='LR')
 parser.add_argument('--momentum', type=float, default=0.9, metavar='M')
 parser.add_argument('--step_size', type=int, default=10, metavar='N')
-
+parser.add_argument('--init_wts', action='store_true', default=False)
 # saving and reloading
 parser.add_argument('--save_dir', type=str, default='checkpoints/', metavar='PATH')
 parser.add_argument('--reload', type=str, default='', metavar='PATH',
@@ -101,7 +101,8 @@ if __name__ == '__main__':
 
     dataloaders, class_names = load_datasets(phases)
     model = alexnet(pretrained=False, num_classes=len(class_names),
-                    relu=(args.activation == 'relu'), dropout=args.use_dropout, overlap=args.overlap_pooling)
+                    relu=(args.activation == 'relu'), dropout=args.use_dropout, 
+                    overlap=args.overlap_pooling, init_wts=args.init_wts)
     if args.reload:
         if os.path.isfile(args.reload):
             print("=> loading checkpoint '{}'".format(args.reload))
@@ -126,8 +127,10 @@ if __name__ == '__main__':
             optimizer = optim.Adam(model.parameters(), lr=args.lr)
         elif args.optimizer == 'sgd':
             optimizer = optim.SGD(model.parameters(), lr=args.lr)
-        else:
+        elif args.optimizer == 'sgdmom':
             optimizer = optim.SGD(model.parameters(), lr=args.lr, momentum=args.momentum)
+        else:
+            optimizer = optim.SGD(model.parameters(), lr=args.lr, momentum=args.momentum, weight_decay=0.0005)
 
         # Decay LR by a factor of gamma every step_size epochs
         exp_lr_scheduler = lr_scheduler.StepLR(optimizer, step_size=args.step_size, gamma=1)

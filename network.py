@@ -24,7 +24,7 @@ class AlexNet(nn.Module):
         else:
             return nn.MaxPool2d(kernel_size=2, stride=2)
 
-    def __init__(self, num_classes=1000, relu=True, dropout=True, overlap=True):
+    def __init__(self, num_classes=1000, relu=True, dropout=True, overlap=True, init_wts=True):
         super(AlexNet, self).__init__()
         # TODO: add response normalization after 1st and 2nd layer
         self.features = nn.Sequential(
@@ -42,6 +42,7 @@ class AlexNet(nn.Module):
             self.activation(relu),
             self.max_pool(overlap),
         )
+
         if dropout:
             self.classifier = nn.Sequential(
                 nn.Dropout(p=0.5),
@@ -60,6 +61,17 @@ class AlexNet(nn.Module):
                 nn.ReLU(inplace=True),
                 nn.Linear(4096, num_classes),
             )
+
+        if init_wts:
+            for i, m in enumerate(self.features.children()):
+                if type(m) == nn.Conv2d:
+                    m.weight.data.normal_(0, 0.001)
+                    if i in [3, 8, 10]:
+                        m.bias.data.fill_(1.0)
+            for i, m in enumerate(self.classifier.children()):
+                if type(m) == nn.Linear:
+                    m.weight.data.normal_(0, 1.0)
+                    m.bias.data.fill_(1.0)
 
     def forward(self, x):
         x = self.features(x)
