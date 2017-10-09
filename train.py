@@ -1,5 +1,6 @@
 import shutil
 import time
+from tensorboardX import SummaryWriter
 import torch
 from torch.autograd import Variable
 
@@ -34,9 +35,9 @@ def train(model, train_loader, criterion, optimizer, use_gpu=False):
         running_corrects += torch.sum(preds == labels.data)
         example_count += inputs.size(0)
     loss = running_loss / example_count
-    acc = running_corrects / example_count
+    acc = (running_corrects / example_count) * 100
 
-    print('Train Loss: {:.4f} Acc: {:.4f} ({}/{})'.format(loss, acc, running_corrects, example_count))
+    print('Train Loss: {:.4f} Acc: {:2.3f} ({}/{})'.format(loss, acc, running_corrects, example_count))
     return loss, acc
 
 
@@ -62,8 +63,8 @@ def validate(model, val_loader, criterion, use_gpu=False):
         running_corrects += torch.sum(preds == labels.data)
         example_count += inputs.size(0)
     loss = running_loss / example_count
-    acc = running_corrects / example_count
-    print('Validation Loss: {:.4f} Acc: {:.4f} ({}/{})'.format(loss, acc, running_corrects, example_count))
+    acc = (running_corrects / example_count) * 100
+    print('Validation Loss: {:.4f} Acc: {:2.3f} ({}/{})'.format(loss, acc, running_corrects, example_count))
     return loss, acc
 
 
@@ -73,23 +74,29 @@ def train_model(model, data_loaders, criterion, optimizer, scheduler, save_dir, 
 
     best_model_wts = model.state_dict()
     best_acc = 0.0
-
+    writer = SummaryWriter()
     for epoch in range(num_epochs):
         print('Epoch {}/{}'.format(epoch, num_epochs - 1))
         print('-' * 10)
 
         scheduler.step()
-        train(model, data_loaders['train'], criterion, optimizer, use_gpu)
-        epoch_loss, epoch_acc = validate(model, data_loaders['validation'], criterion, use_gpu)
-        # TODO: Use TensorBoard to record metrics.
+
+        train_loss, train_acc = train(model, data_loaders['train'], criterion, optimizer, use_gpu)
+        writer.add_scalar('train_loss', train_loss, epoch)
+        writer.add_scalar('train_acc', train_acc, epoch)
+
+        val_loss, val_acc = validate(model, data_loaders['validation'], criterion, use_gpu)
+        writer.add_scalar('val_loss', val_loss, epoch)
+        writer.add_scalar('val_acc', train_acc, epoch)
+
         # deep copy the model
-        is_best = epoch_acc > best_acc
+        is_best = val_acc > best_acc
         if is_best:
-            best_acc = epoch_acc
+            best_acc = val_acc
             best_model_wts = model.state_dict()
 
         save_checkpoint(save_dir, {
-            'epoch': epoch + 1,
+            'epoch': epoch,
             'best_acc': best_acc,
             'state_dict': model.state_dict(),
             # 'optimizer': optimizer.state_dict(),
@@ -99,9 +106,13 @@ def train_model(model, data_loaders, criterion, optimizer, scheduler, save_dir, 
     print('Training complete in {:.0f}m {:.0f}s'.format(
         time_elapsed // 60, time_elapsed % 60))
     print('Best val Acc: {:4f}'.format(best_acc))
-
     # load best model weights
     model.load_state_dict(best_model_wts)
+
+    # export scalar data to JSON for external processing
+    writer.export_scalars_to_json(save_dir + "/all_scalars.json")
+    writer.close()
+
     return model
 
 
@@ -130,6 +141,6 @@ def test_model(model, test_loader, use_gpu=False):
         # statistics
         running_corrects += torch.sum(preds == labels.data)
         example_count += inputs.size(0)
-    acc = running_corrects / example_count
-    print('Test Acc: {:.4f} ({}/{})'.format(acc, running_corrects, example_count))
+    acc = (running_corrects / example_count) * 100
+    print('Test Acc: {:2.3f} ({}/{})'.format(acc, running_corrects, example_count))
     return acc

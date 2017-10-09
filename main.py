@@ -23,11 +23,11 @@ parser.add_argument('--use_gpu', action='store_true', default=False)
 
 # experiment options
 parser.add_argument('--activation', type=str, choices=['relu', 'tanh'], default='relu',
-                    help='Activation function to use. (default: relu)')
+                    help='activation function to use. (default: relu)')
 parser.add_argument('--use_dropout', action='store_true', default=True)
 parser.add_argument('--overlap_pooling', action='store_true', default=True)
 parser.add_argument('--optimizer', type=str, choices=['sgd', 'sgdmom', 'adam'], default='sgdmom',
-                    help='Optimizer to use. (default: sgdmom)')
+                    help='optimizer to use. (default: sgdmom)')
 
 parser.add_argument('--epochs', type=int, default=40, metavar='N')
 parser.add_argument('--lr', type=float, default=0.01, metavar='LR')
@@ -37,13 +37,13 @@ parser.add_argument('--step_size', type=int, default=10, metavar='N')
 # saving and reloading
 parser.add_argument('--save_dir', type=str, default='checkpoints/', metavar='PATH')
 parser.add_argument('--reload', type=str, default='', metavar='PATH',
-                    help='Path to checkpoint to load (default: none)')
+                    help='path to checkpoint to load (default: none)')
 # parser.add_argument('--start-epoch', default=0, type=int, metavar='N',
 #                     help='Manual epoch number (useful on restarts)')
 
 # to run in test mode
 parser.add_argument('--test', default=False, action='store_true',
-                    help='Test model on test set (use with --reload)')
+                    help='test model on test set (use with --reload)')
 args = parser.parse_args()
 
 # Data augmentation and normalization for training
