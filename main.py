@@ -101,7 +101,7 @@ if __name__ == '__main__':
 
     dataloaders, class_names = load_datasets(phases)
     dropout = (not args.no_dropout)
-    overlap = (not args.overlap)
+    overlap = (not args.no_overlap)
     model = alexnet(pretrained=False, num_classes=len(class_names),
                     relu=(args.activation == 'relu'), dropout=dropout,
                     overlap=overlap, init_wts=args.init_wts)

@@ -74,7 +74,7 @@ def train_model(model, data_loaders, criterion, optimizer, scheduler, save_dir, 
 
     best_model_wts = model.state_dict()
     best_acc = 0.0
-    writer = SummaryWriter()
+    writer = SummaryWriter(save_dir)
     for epoch in range(num_epochs):
         print('Epoch {}/{}'.format(epoch, num_epochs - 1))
         print('-' * 10)

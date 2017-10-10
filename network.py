@@ -65,12 +65,14 @@ class AlexNet(nn.Module):
         if init_wts:
             for i, m in enumerate(self.features.children()):
                 if type(m) == nn.Conv2d:
-                    m.weight.data.normal_(0, 0.001)
+                    print('{}: {}'.format(i, m))
+                    m.weight.data.normal_(0, 0.01)
                     if i in [3, 8, 10]:
                         m.bias.data.fill_(1.0)
             for i, m in enumerate(self.classifier.children()):
                 if type(m) == nn.Linear:
-                    m.weight.data.normal_(0, 1.0)
+                    print('{}: {}'.format(i, m))
+                    m.weight.data.normal_(0, 0.01)
                     m.bias.data.fill_(1.0)
 
     def forward(self, x):
