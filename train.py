@@ -82,12 +82,12 @@ def train_model(model, data_loaders, criterion, optimizer, scheduler, save_dir, 
         scheduler.step()
 
         train_loss, train_acc = train(model, data_loaders['train'], criterion, optimizer, use_gpu)
-        writer.add_scalar('train_loss', train_loss, epoch)
-        writer.add_scalar('train_acc', train_acc, epoch)
+        writer.add_scalar('Train Loss', train_loss, epoch)
+        writer.add_scalar('Train Accuracy', train_acc, epoch)
 
         val_loss, val_acc = validate(model, data_loaders['validation'], criterion, use_gpu)
-        writer.add_scalar('val_loss', val_loss, epoch)
-        writer.add_scalar('val_acc', train_acc, epoch)
+        writer.add_scalar('Validation Loss', val_loss, epoch)
+        writer.add_scalar('Validation Accuracy', val_acc, epoch)
 
         # deep copy the model
         is_best = val_acc > best_acc
