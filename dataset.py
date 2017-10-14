@@ -71,6 +71,7 @@ def default_loader(path):
 class AlexnetDataset(Dataset):
 
     def __init__(self, root, phase, transform=None, loader=default_loader):
+        super(AlexnetDataset, self).__init__()
         classes, class_to_idx = find_classes(root)
         imgs = make_dataset(root, phase, class_to_idx)
         if len(imgs) == 0:

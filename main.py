@@ -35,7 +35,7 @@ parser.add_argument('--momentum', type=float, default=0.9, metavar='M')
 parser.add_argument('--step_size', type=int, default=10, metavar='N')
 parser.add_argument('--init_wts', action='store_true', default=False)
 # saving and reloading
-parser.add_argument('--save_dir', type=str, default='checkpoints/', metavar='PATH')
+parser.add_argument('--save_dir', type=str, default='/home/cse/dual/cs5130298/scratch/checkpoints/', metavar='PATH')
 parser.add_argument('--reload', type=str, default='', metavar='PATH',
                     help='path to checkpoint to load (default: none)')
 # parser.add_argument('--start-epoch', default=0, type=int, metavar='N',
