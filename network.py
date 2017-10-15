@@ -1,6 +1,8 @@
 # ref: https://www.analyticsvidhya.com/blog/2016/04/deep-learning-computer-vision-introduction-convolution-neural-networks/
-
+import torch
 import torch.nn as nn
+import torch.autograd.Variable as Variable
+import torch.nn.functional as F
 import torch.utils.model_zoo as model_zoo
 
 __all__ = ['AlexNet', 'alexnet']
@@ -9,6 +11,26 @@ __all__ = ['AlexNet', 'alexnet']
 model_urls = {
     'alexnet': 'https://download.pytorch.org/models/alexnet-owt-4df8aa71.pth',
 }
+
+class LRN(nn.Module):
+
+    def __init__(self, k, n, alpha, beta):
+        super(LRN, self).__init__()
+        self.k = k
+        self.n = n
+        self.alpha = alpha
+        self.beta = beta
+        self.weights = torch.FloatTensor(1, 1, self.n, 1, 1).fill_(1)
+        self.weights = Variable(self.weights)
+        self.padding = (int((self.n - 1) / 2), 0, 0)
+
+    def forward(self, x):
+        denom = x.pow(2).unsqueeze(1)
+        denom = F.conv3d(denom, self.weights, padding=self.padding)
+        denom = denom.squeeze(1).mul(self.alpha).add(self.k).pow(self.beta)
+        x = x.div(denom)
+        return(x)
+
 
 class AlexNet(nn.Module):
 
@@ -30,9 +52,11 @@ class AlexNet(nn.Module):
         self.features = nn.Sequential(
             nn.Conv2d(in_channels=3, out_channels=96, kernel_size=11, stride=4, padding=2),
             self.activation(relu),
+            LRN(k=2, n=5, alpha=1e-4, beta=0.75),
             self.max_pool(overlap),
             nn.Conv2d(in_channels=96, out_channels=256, kernel_size=5, padding=2),
             self.activation(relu),
+            LRN(k=2, n=5, alpha=1e-4, beta=0.75),
             self.max_pool(overlap),
             nn.Conv2d(in_channels=256, out_channels=384, kernel_size=3, padding=1),
             self.activation(relu),

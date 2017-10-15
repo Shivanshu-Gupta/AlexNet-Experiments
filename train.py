@@ -79,8 +79,6 @@ def train_model(model, data_loaders, criterion, optimizer, scheduler, save_dir, 
         print('Epoch {}/{}'.format(epoch, num_epochs - 1))
         print('-' * 10)
 
-        scheduler.step()
-
         train_loss, train_acc = train(model, data_loaders['train'], criterion, optimizer, use_gpu)
         writer.add_scalar('Train Loss', train_loss, epoch)
         writer.add_scalar('Train Accuracy', train_acc, epoch)
@@ -101,6 +99,7 @@ def train_model(model, data_loaders, criterion, optimizer, scheduler, save_dir, 
             'state_dict': model.state_dict(),
             # 'optimizer': optimizer.state_dict(),
         }, is_best)
+        scheduler.step()
 
     time_elapsed = time.time() - since
     print('Training complete in {:.0f}m {:.0f}s'.format(
