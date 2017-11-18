@@ -118,7 +118,7 @@ if __name__ == '__main__':
 
     if args.use_gpu:
         model = model.cuda()
-
+        print(model)
     if not args.test:
         criterion = nn.CrossEntropyLoss()
 
@@ -138,5 +138,5 @@ if __name__ == '__main__':
         # TODO: Store the parameters and use them to initialise next time.
         model = train_model(model, dataloaders, criterion, optimizer, exp_lr_scheduler, args.save_dir,
                             num_epochs=args.epochs, use_gpu=args.use_gpu)
-    
+
     test_model(model, dataloaders['test'], use_gpu=args.use_gpu)

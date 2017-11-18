@@ -1,7 +1,6 @@
 # ref: https://www.analyticsvidhya.com/blog/2016/04/deep-learning-computer-vision-introduction-convolution-neural-networks/
 import torch
 import torch.nn as nn
-import torch.autograd.Variable as Variable
 import torch.nn.functional as F
 import torch.utils.model_zoo as model_zoo
 
@@ -12,6 +11,7 @@ model_urls = {
     'alexnet': 'https://download.pytorch.org/models/alexnet-owt-4df8aa71.pth',
 }
 
+
 class LRN(nn.Module):
 
     def __init__(self, k, n, alpha, beta):
@@ -21,7 +21,7 @@ class LRN(nn.Module):
         self.alpha = alpha
         self.beta = beta
         self.weights = torch.FloatTensor(1, 1, self.n, 1, 1).fill_(1)
-        self.weights = Variable(self.weights)
+        self.weights = nn.Parameter(self.weights)
         self.padding = (int((self.n - 1) / 2), 0, 0)
 
     def forward(self, x):
@@ -30,6 +30,23 @@ class LRN(nn.Module):
         denom = denom.squeeze(1).mul(self.alpha).add(self.k).pow(self.beta)
         x = x.div(denom)
         return(x)
+
+# This implementation of LRN doesn't work because AvgPool3D with padding is not in stable release yet.
+# ref: https://github.com/jiecaoyu/pytorch_imagenet/blob/master/networks/model_list/alexnet.py
+# class LRN(nn.Module):
+#     def __init__(self, k=2, n=1, alpha=1.0, beta=0.75):
+#         super(LRN, self).__init__()
+#         self.average = nn.AvgPool3d(kernel_size=(n, 1, 1), stride=1, padding=(int((n - 1.0) / 2), 0, 0))
+#         self.k = k
+#         self.alpha = alpha
+#         self.beta = beta
+
+#     def forward(self, x):
+#         div = x.pow(2).unsqueeze(1)
+#         div = self.average(div).squeeze(1)
+#         div = div.mul(self.alpha).add(self.k).pow(self.beta)
+#         x = x.div(div)
+#         return x
 
 
 class AlexNet(nn.Module):
@@ -48,15 +65,15 @@ class AlexNet(nn.Module):
 
     def __init__(self, num_classes=1000, relu=True, dropout=True, overlap=True, init_wts=True):
         super(AlexNet, self).__init__()
-        # TODO: add response normalization after 1st and 2nd layer
+        # NOTE: LRN has been disabled as it didn't seem to improve performance but took longer to train.
         self.features = nn.Sequential(
             nn.Conv2d(in_channels=3, out_channels=96, kernel_size=11, stride=4, padding=2),
             self.activation(relu),
-            LRN(k=2, n=5, alpha=1e-4, beta=0.75),
+            # LRN(k=2, n=5, alpha=1e-4, beta=0.75),
             self.max_pool(overlap),
             nn.Conv2d(in_channels=96, out_channels=256, kernel_size=5, padding=2),
             self.activation(relu),
-            LRN(k=2, n=5, alpha=1e-4, beta=0.75),
+            # LRN(k=2, n=5, alpha=1e-4, beta=0.75),
             self.max_pool(overlap),
             nn.Conv2d(in_channels=256, out_channels=384, kernel_size=3, padding=1),
             self.activation(relu),

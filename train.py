@@ -79,11 +79,17 @@ def train_model(model, data_loaders, criterion, optimizer, scheduler, save_dir, 
         print('Epoch {}/{}'.format(epoch, num_epochs - 1))
         print('-' * 10)
 
+        epoch_begin = time.time()
         train_loss, train_acc = train(model, data_loaders['train'], criterion, optimizer, use_gpu)
+        epoch_time = time.time() - epoch_begin
+        print('Epoch Time: {:.0f}m {:.0f}s'.format(epoch_time // 60, epoch_time % 60))
         writer.add_scalar('Train Loss', train_loss, epoch)
         writer.add_scalar('Train Accuracy', train_acc, epoch)
 
+        validation_begin = time.time()
         val_loss, val_acc = validate(model, data_loaders['validation'], criterion, use_gpu)
+        validation_time = time.time() - validation_begin
+        print('Epoch Validation Time: {:.0f}m {:.0f}s'.format(validation_time // 60, validation_time % 60))
         writer.add_scalar('Validation Loss', val_loss, epoch)
         writer.add_scalar('Validation Accuracy', val_acc, epoch)
 
@@ -126,6 +132,7 @@ def test_model(model, test_loader, use_gpu=False):
     model.eval()  # Set model to evaluate mode
     running_corrects = 0
     example_count = 0
+    test_begin = time.time()
     # Iterate over data.
     for (inputs, labels) in test_loader:
         # wrap input, labels in Variable
@@ -142,4 +149,6 @@ def test_model(model, test_loader, use_gpu=False):
         example_count += inputs.size(0)
     acc = (running_corrects / example_count) * 100
     print('Test Acc: {:2.3f} ({}/{})'.format(acc, running_corrects, example_count))
+    test_time = time.time() - test_begin
+    print('Test Time: {:.0f}m {:.0f}s'.format(test_time // 60, test_time % 60))
     return acc
