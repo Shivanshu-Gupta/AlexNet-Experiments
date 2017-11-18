@@ -1,10 +1,20 @@
 import os
-import torch
 import piexif
 import numpy as np
-from torch.utils.data import Dataset, DataLoader
 from PIL import Image
 import matplotlib.pyplot as plt
+
+# Datalodaer for ImageNet dataset
+# Expected directory structure:
+#   -  data_root/
+#       -  class1/
+#           - train/
+#           - test/
+#           - validation/
+#       -   class2/
+#           -...
+#       -...
+
 
 IMG_EXTENSIONS = [
     '.jpg', '.JPG', '.jpeg', '.JPEG',

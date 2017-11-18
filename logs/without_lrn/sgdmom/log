@@ -1,0 +1,367 @@
+Namespace(activation='relu', data_root='/home/cse/dual/cs5130298/scratch/ImageNet_Subset/', epochs=90, init_wts=False, lr=0.01, momentum=0.9, no_dropout=False, no_overlap=False, optimizer='sgdmom', reload='', remove_exif=False, save_dir='/home/cse/dual/cs5130298/scratch/checkpoints/sgdmom', step_size=10, test=False, use_gpu=True)
+['Apple', 'Baby', 'Bicycle', 'Bird', 'Bus', 'Camel', 'Car', 'Chimpanzee', 'Clock', 'Crocodile', 'Deer', 'Dog', 'Elephant', 'Fish', 'Flower', 'Frog', 'Guitar', 'Horse', 'Lamp', 'Lock', 'Man', 'Motorcycle', 'Mushroom', 'Orange', 'Pear', 'Plane', 'Rocket', 'Ship', 'Table', 'Television', 'Tiger', 'Tractor', 'Train', 'Truck', 'Woman']
+{'train': 33870, 'test': 4814, 'validation': 4881}
+Training Model with use_gpu=True...
+Epoch 0/89
+----------
+Train Loss: 0.0274 Acc: 4.786 (1621/33870)
+Validation Loss: 0.0261 Acc: 9.096 (444/4881)
+Epoch 1/89
+----------
+Train Loss: 0.0247 Acc: 11.258 (3813/33870)
+Validation Loss: 0.0236 Acc: 16.021 (782/4881)
+Epoch 2/89
+----------
+Train Loss: 0.0230 Acc: 16.271 (5511/33870)
+Validation Loss: 0.0216 Acc: 23.479 (1146/4881)
+Epoch 3/89
+----------
+Train Loss: 0.0218 Acc: 20.404 (6911/33870)
+Validation Loss: 0.0204 Acc: 25.200 (1230/4881)
+Epoch 4/89
+----------
+Train Loss: 0.0206 Acc: 24.565 (8320/33870)
+Validation Loss: 0.0194 Acc: 30.342 (1481/4881)
+Epoch 5/89
+----------
+Train Loss: 0.0197 Acc: 27.989 (9480/33870)
+Validation Loss: 0.0174 Acc: 38.148 (1862/4881)
+Epoch 6/89
+----------
+Train Loss: 0.0186 Acc: 31.851 (10788/33870)
+Validation Loss: 0.0167 Acc: 39.684 (1937/4881)
+Epoch 7/89
+----------
+Train Loss: 0.0178 Acc: 34.665 (11741/33870)
+Validation Loss: 0.0150 Acc: 44.540 (2174/4881)
+Epoch 8/89
+----------
+Train Loss: 0.0172 Acc: 36.634 (12408/33870)
+Validation Loss: 0.0147 Acc: 46.773 (2283/4881)
+Epoch 9/89
+----------
+Train Loss: 0.0166 Acc: 38.792 (13139/33870)
+Validation Loss: 0.0143 Acc: 47.757 (2331/4881)
+Epoch 10/89
+----------
+Train Loss: 0.0160 Acc: 41.228 (13964/33870)
+Validation Loss: 0.0135 Acc: 50.400 (2460/4881)
+Epoch 11/89
+----------
+Train Loss: 0.0153 Acc: 43.841 (14849/33870)
+Validation Loss: 0.0134 Acc: 51.526 (2515/4881)
+Epoch 12/89
+----------
+Train Loss: 0.0149 Acc: 44.494 (15070/33870)
+Validation Loss: 0.0129 Acc: 53.145 (2594/4881)
+Epoch 13/89
+----------
+Train Loss: 0.0146 Acc: 45.819 (15519/33870)
+Validation Loss: 0.0128 Acc: 53.473 (2610/4881)
+Epoch 14/89
+----------
+Train Loss: 0.0142 Acc: 47.845 (16205/33870)
+Validation Loss: 0.0122 Acc: 55.050 (2687/4881)
+Epoch 15/89
+----------
+Train Loss: 0.0138 Acc: 49.035 (16608/33870)
+Validation Loss: 0.0114 Acc: 58.041 (2833/4881)
+Epoch 16/89
+----------
+Train Loss: 0.0135 Acc: 49.914 (16906/33870)
+Validation Loss: 0.0114 Acc: 57.570 (2810/4881)
+Epoch 17/89
+----------
+Train Loss: 0.0132 Acc: 51.104 (17309/33870)
+Validation Loss: 0.0111 Acc: 59.660 (2912/4881)
+Epoch 18/89
+----------
+Train Loss: 0.0128 Acc: 52.598 (17815/33870)
+Validation Loss: 0.0107 Acc: 60.070 (2932/4881)
+Epoch 19/89
+----------
+Train Loss: 0.0126 Acc: 53.047 (17967/33870)
+Validation Loss: 0.0112 Acc: 59.086 (2884/4881)
+Epoch 20/89
+----------
+Train Loss: 0.0124 Acc: 53.779 (18215/33870)
+Validation Loss: 0.0102 Acc: 62.159 (3034/4881)
+Epoch 21/89
+----------
+Train Loss: 0.0121 Acc: 55.235 (18708/33870)
+Validation Loss: 0.0104 Acc: 61.237 (2989/4881)
+Epoch 22/89
+----------
+Train Loss: 0.0118 Acc: 56.200 (19035/33870)
+Validation Loss: 0.0102 Acc: 61.401 (2997/4881)
+Epoch 23/89
+----------
+Train Loss: 0.0117 Acc: 56.631 (19181/33870)
+Validation Loss: 0.0100 Acc: 63.860 (3117/4881)
+Epoch 24/89
+----------
+Train Loss: 0.0114 Acc: 57.467 (19464/33870)
+Validation Loss: 0.0103 Acc: 61.565 (3005/4881)
+Epoch 25/89
+----------
+Train Loss: 0.0113 Acc: 57.535 (19487/33870)
+Validation Loss: 0.0101 Acc: 62.713 (3061/4881)
+Epoch 26/89
+----------
+Train Loss: 0.0112 Acc: 58.364 (19768/33870)
+Validation Loss: 0.0097 Acc: 64.618 (3154/4881)
+Epoch 27/89
+----------
+Train Loss: 0.0110 Acc: 59.200 (20051/33870)
+Validation Loss: 0.0097 Acc: 65.069 (3176/4881)
+Epoch 28/89
+----------
+Train Loss: 0.0108 Acc: 59.675 (20212/33870)
+Validation Loss: 0.0100 Acc: 63.471 (3098/4881)
+Epoch 29/89
+----------
+Train Loss: 0.0106 Acc: 60.210 (20393/33870)
+Validation Loss: 0.0095 Acc: 65.192 (3182/4881)
+Epoch 30/89
+----------
+Train Loss: 0.0105 Acc: 60.676 (20551/33870)
+Validation Loss: 0.0098 Acc: 64.352 (3141/4881)
+Epoch 31/89
+----------
+Train Loss: 0.0103 Acc: 61.535 (20842/33870)
+Validation Loss: 0.0090 Acc: 67.056 (3273/4881)
+Epoch 32/89
+----------
+Train Loss: 0.0102 Acc: 62.008 (21002/33870)
+Validation Loss: 0.0087 Acc: 67.322 (3286/4881)
+Epoch 33/89
+----------
+Train Loss: 0.0102 Acc: 61.668 (20887/33870)
+Validation Loss: 0.0091 Acc: 66.810 (3261/4881)
+Epoch 34/89
+----------
+Train Loss: 0.0099 Acc: 62.893 (21302/33870)
+Validation Loss: 0.0087 Acc: 68.756 (3356/4881)
+Epoch 35/89
+----------
+Train Loss: 0.0099 Acc: 63.056 (21357/33870)
+Validation Loss: 0.0087 Acc: 67.343 (3287/4881)
+Epoch 36/89
+----------
+Train Loss: 0.0098 Acc: 63.304 (21441/33870)
+Validation Loss: 0.0087 Acc: 67.896 (3314/4881)
+Epoch 37/89
+----------
+Train Loss: 0.0096 Acc: 63.815 (21614/33870)
+Validation Loss: 0.0085 Acc: 69.023 (3369/4881)
+Epoch 38/89
+----------
+Train Loss: 0.0097 Acc: 63.732 (21586/33870)
+Validation Loss: 0.0088 Acc: 67.855 (3312/4881)
+Epoch 39/89
+----------
+Train Loss: 0.0094 Acc: 64.774 (21939/33870)
+Validation Loss: 0.0086 Acc: 68.470 (3342/4881)
+Epoch 40/89
+----------
+Train Loss: 0.0093 Acc: 64.753 (21932/33870)
+Validation Loss: 0.0084 Acc: 68.654 (3351/4881)
+Epoch 41/89
+----------
+Train Loss: 0.0094 Acc: 65.123 (22057/33870)
+Validation Loss: 0.0085 Acc: 69.043 (3370/4881)
+Epoch 42/89
+----------
+Train Loss: 0.0091 Acc: 65.642 (22233/33870)
+Validation Loss: 0.0081 Acc: 69.822 (3408/4881)
+Epoch 43/89
+----------
+Train Loss: 0.0091 Acc: 66.085 (22383/33870)
+Validation Loss: 0.0082 Acc: 70.395 (3436/4881)
+Epoch 44/89
+----------
+Train Loss: 0.0090 Acc: 66.253 (22440/33870)
+Validation Loss: 0.0081 Acc: 70.518 (3442/4881)
+Epoch 45/89
+----------
+Train Loss: 0.0089 Acc: 66.758 (22611/33870)
+Validation Loss: 0.0085 Acc: 68.859 (3361/4881)
+Epoch 46/89
+----------
+Train Loss: 0.0087 Acc: 66.921 (22666/33870)
+Validation Loss: 0.0081 Acc: 69.760 (3405/4881)
+Epoch 47/89
+----------
+Train Loss: 0.0088 Acc: 67.210 (22764/33870)
+Validation Loss: 0.0083 Acc: 69.822 (3408/4881)
+Epoch 48/89
+----------
+Train Loss: 0.0087 Acc: 67.458 (22848/33870)
+Validation Loss: 0.0080 Acc: 70.600 (3446/4881)
+Epoch 49/89
+----------
+Train Loss: 0.0086 Acc: 67.724 (22938/33870)
+Validation Loss: 0.0081 Acc: 70.068 (3420/4881)
+Epoch 50/89
+----------
+Train Loss: 0.0085 Acc: 68.081 (23059/33870)
+Validation Loss: 0.0087 Acc: 68.654 (3351/4881)
+Epoch 51/89
+----------
+Train Loss: 0.0084 Acc: 68.152 (23083/33870)
+Validation Loss: 0.0081 Acc: 71.031 (3467/4881)
+Epoch 52/89
+----------
+Train Loss: 0.0083 Acc: 68.323 (23141/33870)
+Validation Loss: 0.0080 Acc: 70.354 (3434/4881)
+Epoch 53/89
+----------
+Train Loss: 0.0083 Acc: 68.784 (23297/33870)
+Validation Loss: 0.0079 Acc: 70.641 (3448/4881)
+Epoch 54/89
+----------
+Train Loss: 0.0083 Acc: 68.993 (23368/33870)
+Validation Loss: 0.0080 Acc: 71.256 (3478/4881)
+Epoch 55/89
+----------
+Train Loss: 0.0082 Acc: 69.017 (23376/33870)
+Validation Loss: 0.0077 Acc: 71.133 (3472/4881)
+Epoch 56/89
+----------
+Train Loss: 0.0081 Acc: 69.407 (23508/33870)
+Validation Loss: 0.0077 Acc: 71.993 (3514/4881)
+Epoch 57/89
+----------
+Train Loss: 0.0080 Acc: 69.897 (23674/33870)
+Validation Loss: 0.0080 Acc: 71.174 (3474/4881)
+Epoch 58/89
+----------
+Train Loss: 0.0080 Acc: 69.835 (23653/33870)
+Validation Loss: 0.0077 Acc: 72.383 (3533/4881)
+Epoch 59/89
+----------
+Train Loss: 0.0079 Acc: 69.861 (23662/33870)
+Validation Loss: 0.0076 Acc: 71.993 (3514/4881)
+Epoch 60/89
+----------
+Train Loss: 0.0078 Acc: 70.396 (23843/33870)
+Validation Loss: 0.0078 Acc: 71.952 (3512/4881)
+Epoch 61/89
+----------
+Train Loss: 0.0078 Acc: 70.585 (23907/33870)
+Validation Loss: 0.0076 Acc: 72.792 (3553/4881)
+Epoch 62/89
+----------
+Train Loss: 0.0079 Acc: 70.419 (23851/33870)
+Validation Loss: 0.0080 Acc: 71.194 (3475/4881)
+Epoch 63/89
+----------
+Train Loss: 0.0078 Acc: 70.641 (23926/33870)
+Validation Loss: 0.0078 Acc: 71.543 (3492/4881)
+Epoch 64/89
+----------
+Train Loss: 0.0077 Acc: 71.175 (24107/33870)
+Validation Loss: 0.0079 Acc: 71.358 (3483/4881)
+Epoch 65/89
+----------
+Train Loss: 0.0077 Acc: 71.267 (24138/33870)
+Validation Loss: 0.0076 Acc: 72.731 (3550/4881)
+Epoch 66/89
+----------
+Train Loss: 0.0075 Acc: 71.736 (24297/33870)
+Validation Loss: 0.0078 Acc: 71.235 (3477/4881)
+Epoch 67/89
+----------
+Train Loss: 0.0074 Acc: 72.315 (24493/33870)
+Validation Loss: 0.0080 Acc: 71.748 (3502/4881)
+Epoch 68/89
+----------
+Train Loss: 0.0075 Acc: 72.117 (24426/33870)
+Validation Loss: 0.0080 Acc: 71.584 (3494/4881)
+Epoch 69/89
+----------
+Train Loss: 0.0075 Acc: 71.686 (24280/33870)
+Validation Loss: 0.0077 Acc: 72.588 (3543/4881)
+Epoch 70/89
+----------
+Train Loss: 0.0073 Acc: 72.412 (24526/33870)
+Validation Loss: 0.0076 Acc: 72.895 (3558/4881)
+Epoch 71/89
+----------
+Train Loss: 0.0073 Acc: 72.400 (24522/33870)
+Validation Loss: 0.0081 Acc: 71.789 (3504/4881)
+Epoch 72/89
+----------
+Train Loss: 0.0073 Acc: 72.634 (24601/33870)
+Validation Loss: 0.0076 Acc: 72.915 (3559/4881)
+Epoch 73/89
+----------
+Train Loss: 0.0073 Acc: 72.660 (24610/33870)
+Validation Loss: 0.0076 Acc: 72.792 (3553/4881)
+Epoch 74/89
+----------
+Train Loss: 0.0072 Acc: 72.566 (24578/33870)
+Validation Loss: 0.0078 Acc: 71.686 (3499/4881)
+Epoch 75/89
+----------
+Train Loss: 0.0072 Acc: 73.053 (24743/33870)
+Validation Loss: 0.0075 Acc: 72.915 (3559/4881)
+Epoch 76/89
+----------
+Train Loss: 0.0071 Acc: 73.262 (24814/33870)
+Validation Loss: 0.0078 Acc: 71.891 (3509/4881)
+Epoch 77/89
+----------
+Train Loss: 0.0071 Acc: 73.260 (24813/33870)
+Validation Loss: 0.0076 Acc: 72.915 (3559/4881)
+Epoch 78/89
+----------
+Train Loss: 0.0072 Acc: 73.159 (24779/33870)
+Validation Loss: 0.0076 Acc: 73.202 (3573/4881)
+Epoch 79/89
+----------
+Train Loss: 0.0072 Acc: 72.979 (24718/33870)
+Validation Loss: 0.0075 Acc: 73.448 (3585/4881)
+Epoch 80/89
+----------
+Train Loss: 0.0069 Acc: 73.956 (25049/33870)
+Validation Loss: 0.0076 Acc: 72.670 (3547/4881)
+Epoch 81/89
+----------
+Train Loss: 0.0070 Acc: 73.516 (24900/33870)
+Validation Loss: 0.0077 Acc: 71.604 (3495/4881)
+Epoch 82/89
+----------
+Train Loss: 0.0069 Acc: 74.009 (25067/33870)
+Validation Loss: 0.0077 Acc: 72.936 (3560/4881)
+Epoch 83/89
+----------
+Train Loss: 0.0069 Acc: 74.125 (25106/33870)
+Validation Loss: 0.0075 Acc: 72.731 (3550/4881)
+Epoch 84/89
+----------
+Train Loss: 0.0070 Acc: 73.764 (24984/33870)
+Validation Loss: 0.0076 Acc: 73.223 (3574/4881)
+Epoch 85/89
+----------
+Train Loss: 0.0068 Acc: 74.210 (25135/33870)
+Validation Loss: 0.0076 Acc: 72.506 (3539/4881)
+Epoch 86/89
+----------
+Train Loss: 0.0069 Acc: 74.243 (25146/33870)
+Validation Loss: 0.0074 Acc: 74.042 (3614/4881)
+Epoch 87/89
+----------
+Train Loss: 0.0068 Acc: 74.441 (25213/33870)
+Validation Loss: 0.0079 Acc: 72.260 (3527/4881)
+Epoch 88/89
+----------
+Train Loss: 0.0067 Acc: 74.801 (25335/33870)
+Validation Loss: 0.0074 Acc: 73.796 (3602/4881)
+Epoch 89/89
+----------
+Train Loss: 0.0068 Acc: 74.576 (25259/33870)
+Validation Loss: 0.0073 Acc: 74.186 (3621/4881)
+Training complete in 175m 9s
+Best val Acc: 74.185618
+Test Acc: 72.725 (3501/4814)

@@ -16,28 +16,42 @@ pp = pprint.PrettyPrinter()
 
 plt.ion()
 
-parser = argparse.ArgumentParser(description='Alexnet Experiment')
-parser.add_argument('--data_root', default='/home/cse/dual/cs5130298/scratch/ImageNet_Subset/')
-parser.add_argument('--remove_exif', action='store_true', default=False)
-parser.add_argument('--use_gpu', action='store_true', default=False)
+parser = argparse.ArgumentParser(description='Alexnet Experiment',
+                                 formatter_class=argparse.ArgumentDefaultsHelpFormatter)
+parser.add_argument('--data_root', type=str, default='/home/cse/dual/cs5130298/scratch/ImageNet_Subset/',
+                    required=True, metavar='PATH',
+                    help='path to dataset.')
+parser.add_argument('--remove_exif', action='store_true', default=False,
+                    help='remove EXIF data from images. (corrupt EXIF data gives trouble - best to remove it before use)')
+parser.add_argument('--use_gpu', action='store_true', default=False,
+                    help='Use GPU')
 
 # experiment options
 parser.add_argument('--activation', type=str, choices=['relu', 'tanh'], default='relu',
-                    help='activation function to use. (default: relu)')
-parser.add_argument('--no_dropout', action='store_true', default=False)
-parser.add_argument('--no_overlap', action='store_true', default=False)
+                    help='activation function to use.')
+parser.add_argument('--no_dropout', action='store_true', default=False,
+                    help='Disable dropout')
+parser.add_argument('--no_overlap', action='store_true', default=False,
+                    help='Use non-overlapping maxpool')
 parser.add_argument('--optimizer', type=str, choices=['sgdmomwd', 'sgd', 'sgdmom', 'adam'], default='sgdmomwd',
-                    help='optimizer to use. (default: sgdmomwd)')
+                    help='optimizer to use.')
 
-parser.add_argument('--epochs', type=int, default=40, metavar='N')
-parser.add_argument('--lr', type=float, default=0.01, metavar='LR')
-parser.add_argument('--momentum', type=float, default=0.9, metavar='M')
-parser.add_argument('--step_size', type=int, default=10, metavar='N')
-parser.add_argument('--init_wts', action='store_true', default=False)
+parser.add_argument('--epochs', type=int, default=40, metavar='N',
+                    help='number of epochs train on')
+parser.add_argument('--lr', type=float, default=0.01, metavar='LR',
+                    help='learning rate')
+parser.add_argument('--momentum', type=float, default=0.9, metavar='M',
+                    help='momentum for SGD optimizer')
+parser.add_argument('--step_size', type=int, default=10, metavar='N',
+                    help='number of epochs before lr is decayed')
+parser.add_argument('--init_wts', action='store_true', default=False,
+                    help='Gaussian initialisation of weights')
 # saving and reloading
-parser.add_argument('--save_dir', type=str, default='/home/cse/dual/cs5130298/scratch/checkpoints/', metavar='PATH')
+parser.add_argument('--save_dir', type=str, default='/home/cse/dual/cs5130298/scratch/checkpoints/',
+                    metavar='PATH', required=True,
+                    help='location to save checkpoints and logs')
 parser.add_argument('--reload', type=str, default='', metavar='PATH',
-                    help='path to checkpoint to load (default: none)')
+                    help='path to checkpoint to load')
 # parser.add_argument('--start-epoch', default=0, type=int, metavar='N',
 #                     help='Manual epoch number (useful on restarts)')
 

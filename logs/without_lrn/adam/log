@@ -1,0 +1,573 @@
+Namespace(activation='relu', data_root='/home/cse/dual/cs5130298/scratch/ImageNet_Subset/', epochs=90, init_wts=False, lr=0.001, momentum=0.9, no_dropout=False, no_overlap=False, optimizer='adam', reload='', remove_exif=False, save_dir='/home/cse/dual/cs5130298/scratch/checkpoints/adam', step_size=10, test=False, use_gpu=True)
+['Apple', 'Baby', 'Bicycle', 'Bird', 'Bus', 'Camel', 'Car', 'Chimpanzee', 'Clock', 'Crocodile', 'Deer', 'Dog', 'Elephant', 'Fish', 'Flower', 'Frog', 'Guitar', 'Horse', 'Lamp', 'Lock', 'Man', 'Motorcycle', 'Mushroom', 'Orange', 'Pear', 'Plane', 'Rocket', 'Ship', 'Table', 'Television', 'Tiger', 'Tractor', 'Train', 'Truck', 'Woman']
+{'train': 33870, 'test': 4814, 'validation': 4881}
+AlexNet (
+  (features): Sequential (
+    (0): Conv2d(3, 96, kernel_size=(11, 11), stride=(4, 4), padding=(2, 2))
+    (1): ReLU (inplace)
+    (2): MaxPool2d (size=(3, 3), stride=(2, 2), dilation=(1, 1))
+    (3): Conv2d(96, 256, kernel_size=(5, 5), stride=(1, 1), padding=(2, 2))
+    (4): ReLU (inplace)
+    (5): MaxPool2d (size=(3, 3), stride=(2, 2), dilation=(1, 1))
+    (6): Conv2d(256, 384, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (7): ReLU (inplace)
+    (8): Conv2d(384, 384, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (9): ReLU (inplace)
+    (10): Conv2d(384, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (11): ReLU (inplace)
+    (12): MaxPool2d (size=(3, 3), stride=(2, 2), dilation=(1, 1))
+  )
+  (classifier): Sequential (
+    (0): Dropout (p = 0.5)
+    (1): Linear (9216 -> 4096)
+    (2): ReLU (inplace)
+    (3): Dropout (p = 0.5)
+    (4): Linear (4096 -> 4096)
+    (5): ReLU (inplace)
+    (6): Linear (4096 -> 35)
+  )
+)
+Training Model with use_gpu=True...
+Epoch 0/89
+----------
+Train Loss: 0.0269 Acc: 6.363 (2155/33870)
+Epoch Train Time: 2m 57s
+Validation Loss: 0.0260 Acc: 8.974 (438/4881)
+Epoch Validation Time: 0m 27s
+Epoch 1/89
+----------
+Train Loss: 0.0252 Acc: 9.699 (3285/33870)
+Epoch Train Time: 1m 36s
+Validation Loss: 0.0245 Acc: 14.341 (700/4881)
+Epoch Validation Time: 0m 14s
+Epoch 2/89
+----------
+Train Loss: 0.0241 Acc: 13.448 (4555/33870)
+Epoch Train Time: 1m 36s
+Validation Loss: 0.0242 Acc: 15.386 (751/4881)
+Epoch Validation Time: 0m 14s
+Epoch 3/89
+----------
+Train Loss: 0.0233 Acc: 16.032 (5430/33870)
+Epoch Train Time: 1m 36s
+Validation Loss: 0.0220 Acc: 21.020 (1026/4881)
+Epoch Validation Time: 0m 14s
+Epoch 4/89
+----------
+Train Loss: 0.0224 Acc: 18.595 (6298/33870)
+Epoch Train Time: 1m 36s
+Validation Loss: 0.0217 Acc: 22.905 (1118/4881)
+Epoch Validation Time: 0m 14s
+Epoch 5/89
+----------
+Train Loss: 0.0218 Acc: 20.393 (6907/33870)
+Epoch Train Time: 1m 36s
+Validation Loss: 0.0211 Acc: 23.991 (1171/4881)
+Epoch Validation Time: 0m 14s
+Epoch 6/89
+----------
+Train Loss: 0.0213 Acc: 22.288 (7549/33870)
+Epoch Train Time: 1m 36s
+Validation Loss: 0.0202 Acc: 27.925 (1363/4881)
+Epoch Validation Time: 0m 14s
+Epoch 7/89
+----------
+Train Loss: 0.0210 Acc: 23.472 (7950/33870)
+Epoch Train Time: 1m 36s
+Validation Loss: 0.0207 Acc: 25.999 (1269/4881)
+Epoch Validation Time: 0m 14s
+Epoch 8/89
+----------
+Train Loss: 0.0207 Acc: 24.225 (8205/33870)
+Epoch Train Time: 1m 36s
+Validation Loss: 0.0192 Acc: 30.568 (1492/4881)
+Epoch Validation Time: 0m 14s
+Epoch 9/89
+----------
+Train Loss: 0.0204 Acc: 25.802 (8739/33870)
+Epoch Train Time: 1m 36s
+Validation Loss: 0.0194 Acc: 30.813 (1504/4881)
+Epoch Validation Time: 0m 14s
+Epoch 10/89
+----------
+Train Loss: 0.0202 Acc: 26.309 (8911/33870)
+Epoch Train Time: 1m 36s
+Validation Loss: 0.0185 Acc: 34.091 (1664/4881)
+Epoch Validation Time: 0m 14s
+Epoch 11/89
+----------
+Train Loss: 0.0202 Acc: 26.333 (8919/33870)
+Epoch Train Time: 1m 36s
+Validation Loss: 0.0188 Acc: 33.518 (1636/4881)
+Epoch Validation Time: 0m 14s
+Epoch 12/89
+----------
+Train Loss: 0.0199 Acc: 27.086 (9174/33870)
+Epoch Train Time: 1m 36s
+Validation Loss: 0.0184 Acc: 34.604 (1689/4881)
+Epoch Validation Time: 0m 14s
+Epoch 13/89
+----------
+Train Loss: 0.0197 Acc: 27.851 (9433/33870)
+Epoch Train Time: 1m 36s
+Validation Loss: 0.0179 Acc: 36.652 (1789/4881)
+Epoch Validation Time: 0m 14s
+Epoch 14/89
+----------
+Train Loss: 0.0197 Acc: 28.164 (9539/33870)
+Epoch Train Time: 1m 36s
+Validation Loss: 0.0180 Acc: 36.939 (1803/4881)
+Epoch Validation Time: 0m 14s
+Epoch 15/89
+----------
+Train Loss: 0.0196 Acc: 28.456 (9638/33870)
+Epoch Train Time: 1m 36s
+Validation Loss: 0.0179 Acc: 36.898 (1801/4881)
+Epoch Validation Time: 0m 14s
+Epoch 16/89
+----------
+Train Loss: 0.0194 Acc: 29.412 (9962/33870)
+Epoch Train Time: 1m 36s
+Validation Loss: 0.0180 Acc: 36.058 (1760/4881)
+Epoch Validation Time: 0m 14s
+Epoch 17/89
+----------
+Train Loss: 0.0194 Acc: 28.843 (9769/33870)
+Epoch Train Time: 1m 36s
+Validation Loss: 0.0177 Acc: 37.042 (1808/4881)
+Epoch Validation Time: 0m 14s
+Epoch 18/89
+----------
+Train Loss: 0.0192 Acc: 29.749 (10076/33870)
+Epoch Train Time: 1m 37s
+Validation Loss: 0.0180 Acc: 36.079 (1761/4881)
+Epoch Validation Time: 0m 14s
+Epoch 19/89
+----------
+Train Loss: 0.0192 Acc: 29.787 (10089/33870)
+Epoch Train Time: 1m 36s
+Validation Loss: 0.0176 Acc: 38.107 (1860/4881)
+Epoch Validation Time: 0m 14s
+Epoch 20/89
+----------
+Train Loss: 0.0191 Acc: 30.201 (10229/33870)
+Epoch Train Time: 1m 36s
+Validation Loss: 0.0176 Acc: 37.369 (1824/4881)
+Epoch Validation Time: 0m 14s
+Epoch 21/89
+----------
+Train Loss: 0.0191 Acc: 29.796 (10092/33870)
+Epoch Train Time: 1m 36s
+Validation Loss: 0.0177 Acc: 36.591 (1786/4881)
+Epoch Validation Time: 0m 14s
+Epoch 22/89
+----------
+Train Loss: 0.0191 Acc: 30.340 (10276/33870)
+Epoch Train Time: 1m 36s
+Validation Loss: 0.0172 Acc: 38.885 (1898/4881)
+Epoch Validation Time: 0m 14s
+Epoch 23/89
+----------
+Train Loss: 0.0189 Acc: 31.084 (10528/33870)
+Epoch Train Time: 1m 36s
+Validation Loss: 0.0176 Acc: 38.025 (1856/4881)
+Epoch Validation Time: 0m 14s
+Epoch 24/89
+----------
+Train Loss: 0.0189 Acc: 30.918 (10472/33870)
+Epoch Train Time: 1m 36s
+Validation Loss: 0.0175 Acc: 37.779 (1844/4881)
+Epoch Validation Time: 0m 14s
+Epoch 25/89
+----------
+Train Loss: 0.0189 Acc: 30.951 (10483/33870)
+Epoch Train Time: 1m 36s
+Validation Loss: 0.0169 Acc: 39.029 (1905/4881)
+Epoch Validation Time: 0m 14s
+Epoch 26/89
+----------
+Train Loss: 0.0189 Acc: 30.868 (10455/33870)
+Epoch Train Time: 1m 36s
+Validation Loss: 0.0170 Acc: 39.131 (1910/4881)
+Epoch Validation Time: 0m 14s
+Epoch 27/89
+----------
+Train Loss: 0.0187 Acc: 31.290 (10598/33870)
+Epoch Train Time: 1m 36s
+Validation Loss: 0.0171 Acc: 39.459 (1926/4881)
+Epoch Validation Time: 0m 14s
+Epoch 28/89
+----------
+Train Loss: 0.0187 Acc: 31.184 (10562/33870)
+Epoch Train Time: 1m 36s
+Validation Loss: 0.0172 Acc: 39.623 (1934/4881)
+Epoch Validation Time: 0m 14s
+Epoch 29/89
+----------
+Train Loss: 0.0186 Acc: 31.674 (10728/33870)
+Epoch Train Time: 1m 36s
+Validation Loss: 0.0170 Acc: 40.381 (1971/4881)
+Epoch Validation Time: 0m 14s
+Epoch 30/89
+----------
+Train Loss: 0.0187 Acc: 31.538 (10682/33870)
+Epoch Train Time: 1m 36s
+Validation Loss: 0.0167 Acc: 39.992 (1952/4881)
+Epoch Validation Time: 0m 14s
+Epoch 31/89
+----------
+Train Loss: 0.0187 Acc: 31.577 (10695/33870)
+Epoch Train Time: 1m 36s
+Validation Loss: 0.0174 Acc: 38.496 (1879/4881)
+Epoch Validation Time: 0m 14s
+Epoch 32/89
+----------
+Train Loss: 0.0186 Acc: 32.058 (10858/33870)
+Epoch Train Time: 1m 36s
+Validation Loss: 0.0170 Acc: 39.787 (1942/4881)
+Epoch Validation Time: 0m 14s
+Epoch 33/89
+----------
+Train Loss: 0.0185 Acc: 32.191 (10903/33870)
+Epoch Train Time: 1m 36s
+Validation Loss: 0.0169 Acc: 39.992 (1952/4881)
+Epoch Validation Time: 0m 14s
+Epoch 34/89
+----------
+Train Loss: 0.0186 Acc: 32.132 (10883/33870)
+Epoch Train Time: 1m 36s
+Validation Loss: 0.0173 Acc: 38.640 (1886/4881)
+Epoch Validation Time: 0m 14s
+Epoch 35/89
+----------
+Train Loss: 0.0184 Acc: 32.787 (11105/33870)
+Epoch Train Time: 1m 36s
+Validation Loss: 0.0166 Acc: 40.115 (1958/4881)
+Epoch Validation Time: 0m 14s
+Epoch 36/89
+----------
+Train Loss: 0.0186 Acc: 31.733 (10748/33870)
+Epoch Train Time: 1m 36s
+Validation Loss: 0.0171 Acc: 39.459 (1926/4881)
+Epoch Validation Time: 0m 14s
+Epoch 37/89
+----------
+Train Loss: 0.0186 Acc: 32.182 (10900/33870)
+Epoch Train Time: 1m 36s
+Validation Loss: 0.0173 Acc: 39.111 (1909/4881)
+Epoch Validation Time: 0m 14s
+Epoch 38/89
+----------
+Train Loss: 0.0185 Acc: 32.217 (10912/33870)
+Epoch Train Time: 1m 36s
+Validation Loss: 0.0167 Acc: 40.279 (1966/4881)
+Epoch Validation Time: 0m 14s
+Epoch 39/89
+----------
+Train Loss: 0.0184 Acc: 32.445 (10989/33870)
+Epoch Train Time: 1m 36s
+Validation Loss: 0.0167 Acc: 39.357 (1921/4881)
+Epoch Validation Time: 0m 14s
+Epoch 40/89
+----------
+Train Loss: 0.0184 Acc: 32.982 (11171/33870)
+Epoch Train Time: 1m 36s
+Validation Loss: 0.0167 Acc: 41.098 (2006/4881)
+Epoch Validation Time: 0m 14s
+Epoch 41/89
+----------
+Train Loss: 0.0185 Acc: 32.164 (10894/33870)
+Epoch Train Time: 1m 36s
+Validation Loss: 0.0166 Acc: 40.791 (1991/4881)
+Epoch Validation Time: 0m 14s
+Epoch 42/89
+----------
+Train Loss: 0.0183 Acc: 32.560 (11028/33870)
+Epoch Train Time: 1m 36s
+Validation Loss: 0.0164 Acc: 41.733 (2037/4881)
+Epoch Validation Time: 0m 14s
+Epoch 43/89
+----------
+Train Loss: 0.0183 Acc: 33.200 (11245/33870)
+Epoch Train Time: 1m 37s
+Validation Loss: 0.0166 Acc: 41.098 (2006/4881)
+Epoch Validation Time: 0m 14s
+Epoch 44/89
+----------
+Train Loss: 0.0184 Acc: 32.817 (11115/33870)
+Epoch Train Time: 1m 35s
+Validation Loss: 0.0164 Acc: 41.385 (2020/4881)
+Epoch Validation Time: 0m 14s
+Epoch 45/89
+----------
+Train Loss: 0.0183 Acc: 32.837 (11122/33870)
+Epoch Train Time: 1m 36s
+Validation Loss: 0.0166 Acc: 42.061 (2053/4881)
+Epoch Validation Time: 0m 14s
+Epoch 46/89
+----------
+Train Loss: 0.0183 Acc: 32.923 (11151/33870)
+Epoch Train Time: 1m 36s
+Validation Loss: 0.0164 Acc: 41.262 (2014/4881)
+Epoch Validation Time: 0m 14s
+Epoch 47/89
+----------
+Train Loss: 0.0183 Acc: 32.858 (11129/33870)
+Epoch Train Time: 1m 36s
+Validation Loss: 0.0165 Acc: 41.283 (2015/4881)
+Epoch Validation Time: 0m 13s
+Epoch 48/89
+----------
+Train Loss: 0.0182 Acc: 33.395 (11311/33870)
+Epoch Train Time: 1m 36s
+Validation Loss: 0.0165 Acc: 41.323 (2017/4881)
+Epoch Validation Time: 0m 13s
+Epoch 49/89
+----------
+Train Loss: 0.0182 Acc: 33.357 (11298/33870)
+Epoch Train Time: 1m 36s
+Validation Loss: 0.0164 Acc: 41.651 (2033/4881)
+Epoch Validation Time: 0m 14s
+Epoch 50/89
+----------
+Train Loss: 0.0182 Acc: 33.437 (11325/33870)
+Epoch Train Time: 1m 36s
+Validation Loss: 0.0164 Acc: 41.405 (2021/4881)
+Epoch Validation Time: 0m 14s
+Epoch 51/89
+----------
+Train Loss: 0.0182 Acc: 33.106 (11213/33870)
+Epoch Train Time: 1m 36s
+Validation Loss: 0.0165 Acc: 41.323 (2017/4881)
+Epoch Validation Time: 0m 14s
+Epoch 52/89
+----------
+Train Loss: 0.0183 Acc: 33.000 (11177/33870)
+Epoch Train Time: 1m 36s
+Validation Loss: 0.0168 Acc: 40.156 (1960/4881)
+Epoch Validation Time: 0m 14s
+Epoch 53/89
+----------
+Train Loss: 0.0183 Acc: 32.935 (11155/33870)
+Epoch Train Time: 1m 36s
+Validation Loss: 0.0167 Acc: 40.238 (1964/4881)
+Epoch Validation Time: 0m 14s
+Epoch 54/89
+----------
+Train Loss: 0.0182 Acc: 32.908 (11146/33870)
+Epoch Train Time: 1m 36s
+Validation Loss: 0.0164 Acc: 42.102 (2055/4881)
+Epoch Validation Time: 0m 14s
+Epoch 55/89
+----------
+Train Loss: 0.0181 Acc: 33.437 (11325/33870)
+Epoch Train Time: 1m 36s
+Validation Loss: 0.0164 Acc: 42.123 (2056/4881)
+Epoch Validation Time: 0m 14s
+Epoch 56/89
+----------
+Train Loss: 0.0181 Acc: 33.735 (11426/33870)
+Epoch Train Time: 1m 36s
+Validation Loss: 0.0163 Acc: 41.692 (2035/4881)
+Epoch Validation Time: 0m 14s
+Epoch 57/89
+----------
+Train Loss: 0.0181 Acc: 33.753 (11432/33870)
+Epoch Train Time: 1m 36s
+Validation Loss: 0.0164 Acc: 41.918 (2046/4881)
+Epoch Validation Time: 0m 14s
+Epoch 58/89
+----------
+Train Loss: 0.0181 Acc: 33.552 (11364/33870)
+Epoch Train Time: 1m 36s
+Validation Loss: 0.0166 Acc: 40.279 (1966/4881)
+Epoch Validation Time: 0m 14s
+Epoch 59/89
+----------
+Train Loss: 0.0182 Acc: 33.714 (11419/33870)
+Epoch Train Time: 1m 36s
+Validation Loss: 0.0163 Acc: 42.368 (2068/4881)
+Epoch Validation Time: 0m 14s
+Epoch 60/89
+----------
+Train Loss: 0.0180 Acc: 34.095 (11548/33870)
+Epoch Train Time: 1m 36s
+Validation Loss: 0.0166 Acc: 40.832 (1993/4881)
+Epoch Validation Time: 0m 14s
+Epoch 61/89
+----------
+Train Loss: 0.0180 Acc: 33.661 (11401/33870)
+Epoch Train Time: 1m 36s
+Validation Loss: 0.0161 Acc: 42.512 (2075/4881)
+Epoch Validation Time: 0m 14s
+Epoch 62/89
+----------
+Train Loss: 0.0180 Acc: 33.897 (11481/33870)
+Epoch Train Time: 1m 36s
+Validation Loss: 0.0162 Acc: 42.327 (2066/4881)
+Epoch Validation Time: 0m 14s
+Epoch 63/89
+----------
+Train Loss: 0.0181 Acc: 33.271 (11269/33870)
+Epoch Train Time: 1m 36s
+Validation Loss: 0.0164 Acc: 41.139 (2008/4881)
+Epoch Validation Time: 0m 14s
+Epoch 64/89
+----------
+Train Loss: 0.0181 Acc: 33.986 (11511/33870)
+Epoch Train Time: 1m 36s
+Validation Loss: 0.0166 Acc: 41.323 (2017/4881)
+Epoch Validation Time: 0m 14s
+Epoch 65/89
+----------
+Train Loss: 0.0180 Acc: 34.113 (11554/33870)
+Epoch Train Time: 1m 36s
+Validation Loss: 0.0161 Acc: 42.676 (2083/4881)
+Epoch Validation Time: 0m 14s
+Epoch 66/89
+----------
+Train Loss: 0.0180 Acc: 33.995 (11514/33870)
+Epoch Train Time: 1m 36s
+Validation Loss: 0.0161 Acc: 42.204 (2060/4881)
+Epoch Validation Time: 0m 14s
+Epoch 67/89
+----------
+Train Loss: 0.0182 Acc: 33.513 (11351/33870)
+Epoch Train Time: 1m 36s
+Validation Loss: 0.0160 Acc: 42.676 (2083/4881)
+Epoch Validation Time: 0m 13s
+Epoch 68/89
+----------
+Train Loss: 0.0181 Acc: 33.649 (11397/33870)
+Epoch Train Time: 1m 36s
+Validation Loss: 0.0165 Acc: 41.426 (2022/4881)
+Epoch Validation Time: 0m 14s
+Epoch 69/89
+----------
+Train Loss: 0.0181 Acc: 33.729 (11424/33870)
+Epoch Train Time: 1m 36s
+Validation Loss: 0.0166 Acc: 41.528 (2027/4881)
+Epoch Validation Time: 0m 13s
+Epoch 70/89
+----------
+Train Loss: 0.0180 Acc: 34.225 (11592/33870)
+Epoch Train Time: 1m 36s
+Validation Loss: 0.0163 Acc: 41.938 (2047/4881)
+Epoch Validation Time: 0m 14s
+Epoch 71/89
+----------
+Train Loss: 0.0180 Acc: 34.216 (11589/33870)
+Epoch Train Time: 1m 37s
+Validation Loss: 0.0166 Acc: 41.303 (2016/4881)
+Epoch Validation Time: 0m 14s
+Epoch 72/89
+----------
+Train Loss: 0.0181 Acc: 33.791 (11445/33870)
+Epoch Train Time: 1m 36s
+Validation Loss: 0.0161 Acc: 43.823 (2139/4881)
+Epoch Validation Time: 0m 14s
+Epoch 73/89
+----------
+Train Loss: 0.0180 Acc: 34.461 (11672/33870)
+Epoch Train Time: 1m 36s
+Validation Loss: 0.0164 Acc: 42.061 (2053/4881)
+Epoch Validation Time: 0m 14s
+Epoch 74/89
+----------
+Train Loss: 0.0180 Acc: 34.213 (11588/33870)
+Epoch Train Time: 1m 36s
+Validation Loss: 0.0165 Acc: 41.569 (2029/4881)
+Epoch Validation Time: 0m 14s
+Epoch 75/89
+----------
+Train Loss: 0.0179 Acc: 34.228 (11593/33870)
+Epoch Train Time: 1m 36s
+Validation Loss: 0.0163 Acc: 42.450 (2072/4881)
+Epoch Validation Time: 0m 14s
+Epoch 76/89
+----------
+Train Loss: 0.0180 Acc: 33.856 (11467/33870)
+Epoch Train Time: 1m 36s
+Validation Loss: 0.0164 Acc: 42.471 (2073/4881)
+Epoch Validation Time: 0m 14s
+Epoch 77/89
+----------
+Train Loss: 0.0180 Acc: 34.086 (11545/33870)
+Epoch Train Time: 1m 36s
+Validation Loss: 0.0164 Acc: 41.569 (2029/4881)
+Epoch Validation Time: 0m 14s
+Epoch 78/89
+----------
+Train Loss: 0.0179 Acc: 34.201 (11584/33870)
+Epoch Train Time: 1m 36s
+Validation Loss: 0.0165 Acc: 41.405 (2021/4881)
+Epoch Validation Time: 0m 14s
+Epoch 79/89
+----------
+Train Loss: 0.0179 Acc: 34.464 (11673/33870)
+Epoch Train Time: 1m 36s
+Validation Loss: 0.0160 Acc: 43.085 (2103/4881)
+Epoch Validation Time: 0m 14s
+Epoch 80/89
+----------
+Train Loss: 0.0178 Acc: 34.919 (11827/33870)
+Epoch Train Time: 1m 36s
+Validation Loss: 0.0161 Acc: 42.758 (2087/4881)
+Epoch Validation Time: 0m 13s
+Epoch 81/89
+----------
+Train Loss: 0.0179 Acc: 34.712 (11757/33870)
+Epoch Train Time: 1m 36s
+Validation Loss: 0.0160 Acc: 42.573 (2078/4881)
+Epoch Validation Time: 0m 14s
+Epoch 82/89
+----------
+Train Loss: 0.0178 Acc: 34.981 (11848/33870)
+Epoch Train Time: 1m 36s
+Validation Loss: 0.0163 Acc: 42.327 (2066/4881)
+Epoch Validation Time: 0m 14s
+Epoch 83/89
+----------
+Train Loss: 0.0178 Acc: 34.863 (11808/33870)
+Epoch Train Time: 1m 36s
+Validation Loss: 0.0169 Acc: 40.811 (1992/4881)
+Epoch Validation Time: 0m 14s
+Epoch 84/89
+----------
+Train Loss: 0.0178 Acc: 34.753 (11771/33870)
+Epoch Train Time: 1m 36s
+Validation Loss: 0.0157 Acc: 44.048 (2150/4881)
+Epoch Validation Time: 0m 14s
+Epoch 85/89
+----------
+Train Loss: 0.0178 Acc: 34.765 (11775/33870)
+Epoch Train Time: 1m 36s
+Validation Loss: 0.0159 Acc: 43.311 (2114/4881)
+Epoch Validation Time: 0m 14s
+Epoch 86/89
+----------
+Train Loss: 0.0179 Acc: 34.494 (11683/33870)
+Epoch Train Time: 1m 36s
+Validation Loss: 0.0160 Acc: 42.901 (2094/4881)
+Epoch Validation Time: 0m 14s
+Epoch 87/89
+----------
+Train Loss: 0.0178 Acc: 34.904 (11822/33870)
+Epoch Train Time: 1m 36s
+Validation Loss: 0.0159 Acc: 43.167 (2107/4881)
+Epoch Validation Time: 0m 13s
+Epoch 88/89
+----------
+Train Loss: 0.0179 Acc: 34.352 (11635/33870)
+Epoch Train Time: 1m 36s
+Validation Loss: 0.0158 Acc: 42.676 (2083/4881)
+Epoch Validation Time: 0m 14s
+Epoch 89/89
+----------
+Train Loss: 0.0179 Acc: 34.420 (11658/33870)
+Epoch Train Time: 1m 36s
+Validation Loss: 0.0161 Acc: 43.024 (2100/4881)
+Epoch Validation Time: 0m 14s
+Training complete in 166m 60s
+Best val Acc: 44.048351
+Test Acc: 43.145 (2077/4814)
