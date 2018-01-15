@@ -1,5 +1,5 @@
 # AlexNet Experiments
-This is project is a PyTorch implementation of the AlexNet architeture described in [ImageNet Classification with Deep Convolutional Neural Networks]. The following experiments have been performed on the architecture:
+This repository contains a PyTorch implementation of the AlexNet architeture described in [ImageNet Classification with Deep Convolutional Neural Networks]. The following experiments have been performed on the architecture:
 
 - Activation Unit: ReLU vs Tanh
 - Dropout v/s No Dropout
